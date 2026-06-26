@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <center>
+
+        <h1>Prediction Result</h1>
+
+        <h2>{{ prediction }}</h2>
+
+        <h3>Confidence: {{ confidence }}%</h3>
+
+        <h2>Algorithm Accuracy Comparison</h2>
+
+        <!-- Chart Canvas -->
+        <div style="width:600px; background:white; padding:20px; border-radius:10px;">
+            <canvas id="accuracyChart"></canvas>
+        </div>
+
+        <br>
+
+        <a href="/">Check Another News</a>
+
+    </center>
+
+    <!-- Chart Script -->
+    <script>
+        const ctx = document.getElementById('accuracyChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Naive Bayes', 'Logistic Regression', 'SVM'],
+                datasets: [{
+                    label: 'Accuracy %',
+                    data: [93.30, 98.15, 99.23],
+                    borderWidth: 1
+                }]
+            },
+
+            options: {
+                responsive: true,
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
